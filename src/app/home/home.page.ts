@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import { App } from '@capacitor/app';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -7,13 +8,14 @@ import { LocalNotifications } from '@capacitor/local-notifications';
   standalone: false,
 })
 export class HomePage {
-  twentyFive: number = 1 * 60;
+  twentyFive: number = 25 * 60;
   isOn: boolean = false;
   interval: any;
   //break: number = 5 * 60;
 
   constructor() {
     this.requestNotificationPermission();
+    this.backButton();
   }
 
  
@@ -23,6 +25,16 @@ export class HomePage {
     if(permission.display !== 'granted') {
     alert('Notifications permission not granted');
     }
+  }
+
+  backButton(){
+    App.addListener('backButton', () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        App.exitApp();
+      }
+    });
   }
 
    //notification trigger when time is up
