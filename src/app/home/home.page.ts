@@ -8,7 +8,7 @@ import { App } from '@capacitor/app';
   standalone: false,
 })
 export class HomePage {
-  twentyFive: number = 25 * 60;
+  twentyFive: number = 5;
   isOn: boolean = false;
   interval: any;
   //break: number = 5 * 60;
@@ -52,15 +52,7 @@ export class HomePage {
     ],
    });
   }
-
  
-  
-
-  
-
-  
- 
-
   started(){
     if (this.isOn) return;
     this.isOn = true;
@@ -77,14 +69,16 @@ export class HomePage {
   }
 
   breakPeriod(){
-    this.twentyFive = 5 * 60;
+    //this.twentyFive = 5 * 60;
+    this.twentyFive = 5;
     this.interval = setInterval(() => { 
     if(this.twentyFive > 0){
       this.twentyFive--;
     } else {
       clearInterval(this.interval);
       this.notifyTimeIsUp();
-      this.twentyFive = 25 * 60;
+    //  this.twentyFive = 25 * 60; 
+     this.twentyFive = 5;
       this.isOn = false;
       this.started();
     }
